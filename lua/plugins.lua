@@ -1,6 +1,32 @@
 return {
   -- Packer can manage itself as an optional plugin
   { "wbthomason/packer.nvim" },
+
+  -- utils
+  { "Tastyep/structlog.nvim" },
+  { "nvim-lua/popup.nvim" },
+  { "nvim-lua/plenary.nvim" },
+  { 'tmhedberg/matchit' },
+  { 'kshenoy/vim-signature' },
+
+  -- tpope
+  { "tpope/vim-eunuch" },
+  { "tpope/vim-rsi" },
+  { 'tpope/vim-unimpaired' },
+  { 'tpope/vim-surround' },
+  { 'tpope/vim-repeat' },
+
+  -- git
+  { "tpope/vim-fugitive" },
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("core.gitsigns").setup()
+    end,
+    event = "BufRead",
+  },
+
+  -- lsp
   { "neovim/nvim-lspconfig" },
   { "tamago324/nlsp-settings.nvim" },
   { "jose-elias-alvarez/null-ls.nvim" },
@@ -12,9 +38,12 @@ return {
     end,
     event = "BufRead",
   },
-  { "Tastyep/structlog.nvim" },
-  { "nvim-lua/popup.nvim" },
-  { "nvim-lua/plenary.nvim" },
+
+  -- move in buffer
+  { "ggandor/lightspeed.nvim" },
+  { "wellle/targets.vim" },
+  { "simrat39/symbols-outline.nvim" },
+
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -62,8 +91,12 @@ return {
   },
 
   -- Treesitter
+  { "nvim-treesitter/nvim-treesitter" },
   {
-    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    requires = {
+      "nvim-treesitter/nvim-treesitter",
+    },
     config = function()
       require("core.treesitter").setup()
     end,
@@ -79,14 +112,6 @@ return {
     config = function()
       require("core.nvimtree").setup()
     end,
-  },
-
-  {
-    "lewis6991/gitsigns.nvim",
-    config = function()
-      require("core.gitsigns").setup()
-    end,
-    event = "BufRead",
   },
 
   -- Whichkey
@@ -129,6 +154,14 @@ return {
     config = function()
       require("core.terminal").setup()
     end,
+  },
+  -- Trouble
+  {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup()
+    end
   },
 
   -- Color Scheme

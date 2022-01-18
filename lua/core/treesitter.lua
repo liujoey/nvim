@@ -37,10 +37,33 @@ M.config = function()
         enable = false,
         -- swap_next = textobj_swap_keymaps,
       },
-      -- move = textobj_move_keymaps,
+      move = {
+        enable = true,
+        goto_next_start = {
+          ["]]"] = "@function.outer",
+          ["]c"] = "@class.outer",
+        },
+        goto_next_end = {
+          ["]["] = "@function.outer",
+          ["]C"] = "@class.outer",
+        },
+        goto_previous_start = {
+          ["[["] = "@function.outer",
+          ["[c"] = "@class.outer",
+        },
+        goto_previous_end = {
+          ["[]"] = "@function.outer",
+          ["[C"] = "@class.outer",
+        },
+      },
       select = {
-        enable = false,
-        -- keymaps = textobj_sel_keymaps,
+        enable = true,
+        keymaps = {
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+        },
       },
     },
     textsubjects = {

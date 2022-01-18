@@ -70,6 +70,7 @@ M.config = function()
       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
       ["f"] = { require("core.telescope.custom-finders").find_project_files, "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+      ["t"] = { "<cmd>TroubleToggle<CR>", "Trouble" },
       b = {
         name = "Buffers",
         j = { "<cmd>BufferPick<cr>", "Jump" },
@@ -119,7 +120,8 @@ M.config = function()
         p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
         r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
         R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-        s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+        s = { "<cmd>G<cr>", "Git Status" },
+        S = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
         u = {
           "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
           "Undo Stage Hunk",

@@ -53,7 +53,7 @@ M.load_default_options = function()
 
   ---  SETTINGS  ---
   vim.opt.shortmess:append("c")
-
+  vim.opt.diffopt:append("vertical,iwhite,algorithm:patience")
   for k, v in pairs(default_options) do
     vim.opt[k] = v
   end

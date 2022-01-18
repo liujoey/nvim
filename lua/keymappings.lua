@@ -19,7 +19,9 @@ local mode_adapters = {
   term_mode = "t",
   visual_mode = "v",
   visual_block_mode = "x",
+
   command_mode = "c",
+
 }
 
 local defaults = {
@@ -74,6 +76,9 @@ local defaults = {
     -- Move current line / block with Alt-j/k a la vscode.
     ["<A-j>"] = ":m .+1<CR>==",
     ["<A-k>"] = ":m .-2<CR>==",
+
+    -- 
+    ["<F7>"] = ":SymbolsOutline<CR>",
 
     -- quick refactor
     ["zz"] = { "yygccp", { noremap = false, silent = true } },
