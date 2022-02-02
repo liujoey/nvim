@@ -6,7 +6,7 @@ local opts = {
       },
       workspace = {
         library = {
-          [require("utils").join_paths(get_runtime_dir(), "lua")] = true,
+          [require("utils").join_paths(get_config_dir(), "lua")] = true,
         },
         maxPreload = 100000,
         preloadFileSize = 10000,

@@ -71,6 +71,8 @@ M.config = function()
       ["f"] = { require("core.telescope.custom-finders").find_project_files, "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
       ["t"] = { "<cmd>TroubleToggle<CR>", "Trouble" },
+      ["s"] = { "<cmd>split<CR>", "Split Window" },
+      ["v"] = { "<cmd>vsplit<CR>", "VSplit Window" },
       b = {
         name = "Buffers",
         j = { "<cmd>BufferPick<cr>", "Jump" },
@@ -95,7 +97,7 @@ M.config = function()
           "Sort by language",
         },
       },
-      p = {
+      P = {
         name = "Packer",
         c = { "<cmd>PackerCompile<cr>", "Compile" },
         i = { "<cmd>PackerInstall<cr>", "Install" },
@@ -170,28 +172,24 @@ M.config = function()
           "Workspace Symbols",
         },
       },
-      L = {
-        name = "+LunarVim",
+      n = {
+        name = "+NeoVim",
         c = {
           "<cmd>edit " .. get_config_dir() .. "/config.lua<cr>",
           "Edit config.lua",
         },
         f = {
-          "<cmd>lua require('core.telescope.custom-finders').find_lunarvim_files()<cr>",
-          "Find LunarVim files",
+          "<cmd>lua require('core.telescope.custom-finders').find_neovim_files()<cr>",
+          "Find NeoVim files",
         },
         g = {
-          "<cmd>lua require('core.telescope.custom-finders').grep_lunarvim_files()<cr>",
-          "Grep LunarVim files",
+          "<cmd>lua require('core.telescope.custom-finders').grep_neovim_files()<cr>",
+          "Grep NeoVim files",
         },
-        k = { "<cmd>Telescope keymaps<cr>", "View LunarVim's keymappings" },
+        k = { "<cmd>Telescope keymaps<cr>", "View NeoVim's keymappings" },
         i = {
           "<cmd>lua require('core.info').toggle_popup(vim.bo.filetype)<cr>",
-          "Toggle LunarVim Info",
-        },
-        I = {
-          "<cmd>lua require('core.telescope.custom-finders').view_lunarvim_changelog()<cr>",
-          "View LunarVim's changelog",
+          "Toggle NeoVim Info",
         },
         l = {
           name = "+logs",
@@ -219,10 +217,9 @@ M.config = function()
           },
           P = { "<cmd>exe 'edit '.stdpath('cache').'/packer.nvim.log'<cr>", "Open the Packer logfile" },
         },
-        r = { "<cmd>LvimReload<cr>", "Reload LunarVim's configuration" },
-        u = { "<cmd>LvimUpdate<cr>", "Update LunarVim" },
+        r = { "<cmd>Reload<cr>", "Reload NeoVim's configuration" },
       },
-      s = {
+      S = {
         name = "Search",
         b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
         c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
@@ -231,7 +228,7 @@ M.config = function()
         M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
         r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
         R = { "<cmd>Telescope registers<cr>", "Registers" },
-        t = { "<cmd>Telescope live_grep<cr>", "Text" },
+        S = { "<cmd>Telescope live_grep<cr>", "Text" },
         k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
         C = { "<cmd>Telescope commands<cr>", "Commands" },
         p = {

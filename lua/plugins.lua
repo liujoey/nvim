@@ -3,6 +3,8 @@ return {
   { "wbthomason/packer.nvim" },
 
   -- utils
+  { "nathom/filetype.nvim" },
+  { "stevearc/dressing.nvim" },
   { "Tastyep/structlog.nvim" },
   { "nvim-lua/popup.nvim" },
   { "nvim-lua/plenary.nvim" },

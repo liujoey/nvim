@@ -4,6 +4,7 @@ local Log = require "core.log"
 local generic_opts_any = { noremap = true, silent = true }
 
 local generic_opts = {
+  map_mode = generic_opts_any,
   insert_mode = generic_opts_any,
   normal_mode = generic_opts_any,
   visual_mode = generic_opts_any,
@@ -35,7 +36,6 @@ local defaults = {
 
     -- clear highlights
     ["<BS>"] = ":noh<cr>",
-
   },
   ---@usage change or add keymappings for insert mode
   insert_mode = {
@@ -77,12 +77,14 @@ local defaults = {
     ["<A-j>"] = ":m .+1<CR>==",
     ["<A-k>"] = ":m .-2<CR>==",
 
-    -- 
+    -- Toggle SymbolsOutline
     ["<F7>"] = ":SymbolsOutline<CR>",
 
     -- quick refactor
     ["zz"] = { "yygccp", { noremap = false, silent = true } },
 
+    -- Who needs Ex mode?
+    ["Q"] = ":BufferClose<CR>",
   },
 
   ---@usage change or add keymappings for terminal mode
