@@ -40,6 +40,13 @@ M.config = function()
       },
       hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
       show_help = true, -- show help message on the command line when the popup is visible
+      triggers_blacklist = {
+        -- list of mode / prefixes that should never be hooked by WhichKey
+        -- this is mostly relevant for key maps that start with a native binding
+        -- most people should not need to change this
+        i = { "j", "k", ";" },
+        v = { "j", "k" },
+      },
     },
 
     opts = {
@@ -70,8 +77,10 @@ M.config = function()
       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
       ["f"] = { require("core.telescope.custom-finders").find_project_files, "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-      ["t"] = { "<cmd>TroubleToggle<CR>", "Trouble" },
+      ["o"] = { "<cmd>ClangdSwitchSourceHeader<CR>", "Switch Source Header" },
+      ["r"] = { "<cmd>Telescope resume<CR>", "Resume Telescope" },
       ["s"] = { "<cmd>split<CR>", "Split Window" },
+      ["t"] = { "<cmd>TroubleToggle<CR>", "Trouble" },
       ["v"] = { "<cmd>vsplit<CR>", "VSplit Window" },
       b = {
         name = "Buffers",

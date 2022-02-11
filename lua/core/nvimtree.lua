@@ -49,7 +49,7 @@ function M.config()
         width = 30,
         height = 30,
         side = "left",
-        auto_resize = true,
+        auto_resize = false,
         number = false,
         relativenumber = false,
         mappings = {

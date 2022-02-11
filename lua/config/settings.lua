@@ -35,8 +35,8 @@ M.load_default_options = function()
     updatetime = 300, -- faster completion
     writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
     expandtab = true, -- convert tabs to spaces
-    shiftwidth = 2, -- the number of spaces inserted for each indentation
-    tabstop = 2, -- insert 2 spaces for a tab
+    shiftwidth = 4, -- the number of spaces inserted for each indentation
+    tabstop = 4, -- insert 2 spaces for a tab
     cursorline = true, -- highlight the current line
     number = true, -- set numbered lines
     relativenumber = false, -- set relative numbered lines
@@ -47,8 +47,8 @@ M.load_default_options = function()
     spelllang = "en",
     spellfile = join_paths(get_config_dir(), "spell", "en.utf-8.add"),
     shadafile = join_paths(get_cache_dir(), "lvim.shada"),
-    scrolloff = 8, -- minimal number of screen lines to keep above and below the cursor.
-    sidescrolloff = 8, -- minimal number of screen lines to keep left and right of the cursor.
+    scrolloff = 3, -- minimal number of screen lines to keep above and below the cursor.
+    sidescrolloff = 3, -- minimal number of screen lines to keep left and right of the cursor.
   }
 
   ---  SETTINGS  ---
