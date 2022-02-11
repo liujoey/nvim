@@ -30,7 +30,7 @@ M.config = function()
     },
     -- indent = {enable = true, disable = {"python", "html", "javascript"}},
     -- TODO seems to be broken
-    indent = { enable = true, disable = { "yaml" } },
+    indent = { enable = false },
     autotag = { enable = false },
     textobjects = {
       swap = {
