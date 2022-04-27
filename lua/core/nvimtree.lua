@@ -6,8 +6,6 @@ function M.config()
     active = true,
     on_config_done = nil,
     setup = {
-      quit_on_open = 0,
-      disable_window_picker = 0,
       disable_netrw = true,
       hijack_netrw = true,
       open_on_setup = false,
@@ -15,10 +13,6 @@ function M.config()
         "startify",
         "dashboard",
         "alpha",
-      },
-      update_to_buf_dir = {
-        enable = true,
-        auto_open = true,
       },
       open_on_tab = false,
       hijack_cursor = false,
@@ -50,7 +44,6 @@ function M.config()
         width = 30,
         height = 30,
         side = "left",
-        auto_resize = false,
         number = false,
         relativenumber = false,
         mappings = {
