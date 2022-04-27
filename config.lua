@@ -1,3 +1,5 @@
+lvim.format_on_save = false
+
 lvim.builtin.treesitter.ensure_installed = {
   "c",
   "cpp",

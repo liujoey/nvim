@@ -6,6 +6,8 @@ function M.config()
     active = true,
     on_config_done = nil,
     setup = {
+      quit_on_open = 0,
+      disable_window_picker = 0,
       disable_netrw = true,
       hijack_netrw = true,
       open_on_setup = false,
@@ -18,7 +20,6 @@ function M.config()
         enable = true,
         auto_open = true,
       },
-      auto_close = true,
       open_on_tab = false,
       hijack_cursor = false,
       update_cwd = false,
@@ -69,9 +70,7 @@ function M.config()
       folder_arrows = 1,
       tree_width = 30,
     },
-    quit_on_open = 0,
     git_hl = 1,
-    disable_window_picker = 0,
     root_folder_modifier = ":t",
     icons = {
       default = "",

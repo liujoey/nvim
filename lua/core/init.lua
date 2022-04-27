@@ -10,7 +10,6 @@ end
 
 local uv = vim.loop
 local path_sep = uv.os_uname().version:match "Windows" and "\\" or "/"
-local in_headless = #vim.api.nvim_list_uis() == 0
 
 ---Join path segments that were passed as input
 ---@return string

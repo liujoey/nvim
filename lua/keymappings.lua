@@ -45,8 +45,6 @@ local defaults = {
     ["kj"] = "<ESC>",
     -- much usefull Ctrl-K, delete to line end in insert mode
     ["<C-k>"] = "<C-o>D",
-    -- help insert semi-colon
-    [";;"] = "<END>;",
 
     -- Move current line / block with Alt-j/k ala vscode.
     ["<A-j>"] = "<Esc>:m .+1<CR>==gi",

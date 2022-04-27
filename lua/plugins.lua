@@ -2,6 +2,9 @@ return {
   -- Packer can manage itself as an optional plugin
   { 'wbthomason/packer.nvim' },
 
+  -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+  { "antoinemadec/FixCursorHold.nvim" },
+
   -- utils
   { 'nathom/filetype.nvim' },
   { 'stevearc/dressing.nvim' },
@@ -24,7 +27,7 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     config = function()
-      require('core.gitsigns').setup()
+      require'core.gitsigns'.setup()
     end,
     event = 'BufRead',
   },
@@ -37,7 +40,7 @@ return {
   {
     'rcarriga/nvim-notify',
     config = function()
-      require('core.notify').setup()
+      require'core.notify'.setup()
     end,
     event = 'BufRead',
   },
@@ -51,7 +54,7 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     config = function()
-      require('core.telescope').setup()
+      require'core.telescope'.setup()
     end,
   },
   {
@@ -62,18 +65,23 @@ return {
   {
     'hrsh7th/nvim-cmp',
     config = function()
-      require('core.cmp').setup()
+      require'core.cmp'.setup()
     end,
     requires = {
       'L3MON4D3/LuaSnip',
       'rafamadriz/friendly-snippets',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-nvim-lsp-document-symbol',
     },
   },
+  { 'hrsh7th/cmp-cmdline' },
+  { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
   { 'rafamadriz/friendly-snippets' },
+  { 'hrsh7th/cmp-nvim-lsp-signature-help' },
   {
     'L3MON4D3/LuaSnip',
     config = function()
-      require('luasnip/loaders/from_vscode').lazy_load()
+      require'luasnip/loaders/from_vscode'.lazy_load()
     end,
   },
   { 'hrsh7th/cmp-nvim-lsp' },
@@ -89,7 +97,7 @@ return {
   {
     'windwp/nvim-autopairs',
     config = function()
-      require('core.autopairs').setup()
+      require'core.autopairs'.setup()
     end,
   },
 
@@ -101,7 +109,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     config = function()
-      require('core.treesitter').setup()
+      require'core.treesitter'.setup()
     end,
   },
   {
@@ -113,7 +121,7 @@ return {
   {
     'kyazdani42/nvim-tree.lua',
     config = function()
-      require('core.nvimtree').setup()
+      require'core.nvimtree'.setup()
     end,
   },
 
@@ -121,7 +129,7 @@ return {
   {
     'folke/which-key.nvim',
     config = function()
-      require('core.which-key').setup()
+      require'core.which-key'.setup()
     end,
     event = 'BufWinEnter',
   },
@@ -131,7 +139,7 @@ return {
     'numToStr/Comment.nvim',
     event = 'BufRead',
     config = function()
-      require('core.comment').setup()
+      require'core.comment'.setup()
     end,
   },
   -- Icons
@@ -140,13 +148,13 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     config = function()
-      require('core.lualine').setup()
+      require'core.lualine'.setup()
     end,
   },
   {
     'romgrk/barbar.nvim',
     config = function()
-      require('core.bufferline').setup()
+      require'core.bufferline'.setup()
     end,
     event = 'BufWinEnter',
   },
@@ -155,7 +163,7 @@ return {
     'akinsho/toggleterm.nvim',
     event = 'BufWinEnter',
     config = function()
-      require('core.terminal').setup()
+      require'core.terminal'.setup()
     end,
   },
   -- Trouble
@@ -163,10 +171,16 @@ return {
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-      require('trouble').setup()
-    end
+      require'trouble'.setup()
+    end,
   },
-
+  -- Debugging
+  {
+    'puremourning/vimspector',
+    setup = function()
+        vim.g["vimspector_enable_mappings"] = "HUMAN"
+    end,
+  },
   -- Color Scheme
   { 'sainnhe/edge' },
 }

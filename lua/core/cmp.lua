@@ -227,11 +227,14 @@ M.config = function()
         require("luasnip").lsp_expand(args.body)
       end,
     },
-    documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    window = {
+        documentation = {
+          border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        },
     },
     sources = {
       { name = "nvim_lsp" },
+      { name = 'nvim_lsp_signature_help' },
       { name = "path" },
       { name = "luasnip" },
       { name = "cmp_tabnine" },
@@ -302,7 +305,20 @@ M.config = function()
 end
 
 function M.setup()
-  require("cmp").setup(lvim.builtin.cmp)
+  local cmp = require"cmp"
+  cmp.setup(lvim.builtin.cmp)
+  cmp.setup.cmdline(":", {
+      sources = {
+          { name = "cmdline" },
+      }
+  })
+  cmp.setup.cmdline("/", {
+      sources = cmp.config.sources({
+          { name = 'nvim_lsp_document_symbol' }
+      }, {
+          { name = 'buffer' }
+      }),
+  })
 end
 
 return M
