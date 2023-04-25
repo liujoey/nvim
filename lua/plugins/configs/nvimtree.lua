@@ -1,7 +1,6 @@
 local options = {
   filters = {
     dotfiles = false,
-    exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
   },
   disable_netrw = true,
   hijack_netrw = true,
