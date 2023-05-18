@@ -1,3 +1,5 @@
+local Util = require("core.utils")
+
 local options = {
   defaults = {
     vimgrep_arguments = {
@@ -10,8 +12,8 @@ local options = {
       "--column",
       "--smart-case",
     },
-    prompt_prefix= " 󰍉  ",
-    selection_caret = "  ",
+    prompt_prefix = " ",
+    selection_caret = " ",
     entry_prefix = "  ",
     initial_mode = "insert",
     selection_strategy = "reset",
@@ -45,6 +47,29 @@ local options = {
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
     mappings = {
+      i = {
+        ["<c-t>"] = function(...)
+          return require("trouble.providers.telescope").open_with_trouble(...)
+        end,
+        ["<a-i>"] = function()
+          Util.telescope("find_files", { no_ignore = true })()
+        end,
+        ["<a-h>"] = function()
+          Util.telescope("find_files", { hidden = true })()
+        end,
+        ["<C-Down>"] = function(...)
+          return require("telescope.actions").cycle_history_next(...)
+        end,
+        ["<C-Up>"] = function(...)
+          return require("telescope.actions").cycle_history_prev(...)
+        end,
+        ["<C-f>"] = function(...)
+          return require("telescope.actions").preview_scrolling_down(...)
+        end,
+        ["<C-b>"] = function(...)
+          return require("telescope.actions").preview_scrolling_up(...)
+        end,
+      },
       n = { ["q"] = require("telescope.actions").close },
     },
   },

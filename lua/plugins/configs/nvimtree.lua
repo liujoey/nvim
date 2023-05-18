@@ -8,7 +8,7 @@ local options = {
   hijack_unnamed_buffer_when_opening = false,
   sync_root_with_cwd = true,
   update_focused_file = {
-    enable = true,
+    enable = false,
     update_root = false,
   },
   view = {
@@ -50,7 +50,7 @@ local options = {
         default = "",
         symlink = "",
         folder = {
-          default = "",
+          default = "",
           empty = "",
           empty_open = "",
           open = "",

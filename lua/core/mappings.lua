@@ -1,5 +1,6 @@
 -- n, v, i, t = mode names
 
+local Util = require("core.utils")
 local M = {}
 
 M.general = {
@@ -20,8 +21,6 @@ M.general = {
     [";"] = { ";<c-g>u" },
   },
   n = {
-    ["<leader><space>"] = { "<cmd> Telescope find_files <CR>", "Find Files" },
-    ["<leader>bb"] = { "<cmd>e #<cr>", "Switch to Other Buffer" },
     ["<leader>`"] = { "<cmd>e #<cr>", "Switch to Other Buffer" },
 
     ["<BS>"] = { ":noh <CR>", "clear highlights" },
@@ -65,6 +64,9 @@ M.general = {
   },
 
   v = {
+    ["H"] = {"^"},
+    ["L"] = {"$"},
+    ["<tab>"] = {"%"},
     -- move lines
     ["<A-j>"] = { ":m '>+1<cr>gv=gv" },
     ["<A-k>"] = { ":m '<-2<cr>gv=gv" },
@@ -74,6 +76,9 @@ M.general = {
     [">"] = { ">gv" },
   },
   o = {
+    ["H"] = {"^"},
+    ["L"] = {"$"},
+    ["<tab>"] = {"%"},
     ["n"] = { "'Nn'[v:searchforward]", "Next search result", opts = { expr = true } },
     ["N"] = { "'nN'[v:searchforward]", "Prev search result", opts = { expr = true } },
   },
@@ -100,32 +105,11 @@ M.tabufline = {
     end, "Next Buffer" },
     -- cycle through buffers
     -- close buffer + hide terminal buffer
-    ["<leader>x"] = {
+    ["Q"] = {
       function()
         require("nvchad_ui.tabufline").close_buffer()
       end,
       "close buffer",
-    },
-  },
-}
-
-M.comment = {
-  plugin = true,
-
-  -- toggle comment in both modes
-  n = {
-    ["<leader>/"] = {
-      function()
-        require("Comment.api").toggle.linewise.current()
-      end,
-      "toggle comment",
-    },
-  },
-
-  v = {
-    ["<leader>/"] = {
-      "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-      "toggle comment",
     },
   },
 }
@@ -199,7 +183,7 @@ M.lspconfig = {
       "lsp references",
     },
 
-    ["<leader>f"] = {
+    ["<leader>xf"] = {
       function()
         vim.diagnostic.open_float { border = "rounded" }
       end,
@@ -243,23 +227,45 @@ M.telescope = {
 
   n = {
     -- find
-    ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "find files" },
-    ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "find all" },
-    ["<leader>fw"] = { "<cmd> Telescope live_grep <CR>", "live grep" },
-    ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "find buffers" },
-    ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "help page" },
+    ["<leader><space>"] = { Util.telescope("files"), "Find Files (root dir)" },
+    ["<leader>,"] = { "<cmd>Telescope buffers show_all_buffers=true<cr>", "Switch Buffer" },
+    ["<leader>/"] = { Util.telescope("live_grep"), "Find in Files (Grep)" },
+    ["<leader>:"] = { "<cmd>Telescope command_history<cr>", "Command History" },
     ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "find oldfiles" },
-    ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "find in current buffer" },
+    ["<leader>b/"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "find in current buffer" },
+
+    ["<leader>hh"] = { "<cmd> Telescope help_tags <CR>", "help page" },
+    -- search
+    ["<leader>sc"] = { "<cmd>Telescope commands<cr>", "Commands" },
+    ["<leader>sd"] = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
+    ["<leader>sw"] = { Util.telescope("grep_string"), "Word (root dir)" },
+    ["<leader>ss"] = {
+      Util.telescope("lsp_document_symbols", {
+        symbols = {
+          "Class",
+          "Function",
+          "Method",
+          "Constructor",
+          "Interface",
+          "Module",
+          "Struct",
+          "Trait",
+          "Field",
+          "Property",
+        },
+      }),
+      "Goto Symbol",
+    },
 
     -- git
-    ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "git commits" },
-    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "git status" },
+    ["<leader>gc"] = { "<cmd> Telescope git_commits <CR>", "git commits" },
+    ["<leader>gs"] = { "<cmd> Telescope git_status <CR>", "git status" },
 
     -- pick a hidden term
-    ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "pick hidden term" },
+    ["<leader>ut"] = { "<cmd> Telescope terms <CR>", "pick hidden term" },
 
     -- theme switcher
-    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "nvchad themes" },
+    ["<leader>uC"] = { "<cmd> Telescope themes <CR>", "nvchad themes" },
   },
 }
 
@@ -330,13 +336,6 @@ M.nvterm = {
   },
 }
 
-M.whichkey = {
-  plugin = true,
-
-  n = {
-  },
-}
-
 M.blankline = {
   plugin = true,
 
@@ -349,6 +348,7 @@ M.blankline = {
         )
 
         if ok then
+          vim.cmd [[normal! m']]
           vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
           vim.cmd [[normal! _]]
         end

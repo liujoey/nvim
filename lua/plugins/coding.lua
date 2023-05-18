@@ -47,15 +47,4 @@ return {
       require("cmp").setup(opts)
     end,
   },
-
-  {
-    "numToStr/Comment.nvim",
-    -- keys = { "gc", "gb" },
-    init = function()
-      require("core.utils").load_mappings "comment"
-    end,
-    config = function()
-      require("Comment").setup()
-    end,
-  },
 }

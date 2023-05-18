@@ -28,25 +28,26 @@ local options = {
   },
 
   defaults = {
-    f = {
+    mode = { "n", "v" },
+    ["f"] = {
       name = "file/find",
     },
-    b = {
+    ["b"] = {
       name = "buffer",
     },
-    c = {
+    ["c"] = {
       name = "code",
     },
-    g = {
+    ["g"] = {
       name = "git",
     },
-    s = {
+    ["s"] = {
       name = "search",
     },
-    u = {
+    ["u"] = {
       name = "UI",
     },
-    x = {
+    ["x"] = {
       name = "diagnostics/quickfix",
     }
   }

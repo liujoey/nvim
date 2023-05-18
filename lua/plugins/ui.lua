@@ -75,7 +75,7 @@ return {
 
   {
     "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
+   cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
     keys = {
       { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
@@ -121,6 +121,13 @@ return {
         require("lazy").load({ plugins = { "dressing.nvim" } })
         return vim.ui.input(...)
       end
+    end,
+  },
+
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require'colorizer'.setup()
     end,
   },
 }

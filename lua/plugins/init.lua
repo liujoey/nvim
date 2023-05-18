@@ -12,6 +12,8 @@ local plugins = {
 
   { import = "plugins.lsp" },
 
+  { import = "plugins.dap" },
+
   { import = "plugins.coding" },
 
   { import = "plugins.editing" },

@@ -11,4 +11,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 require "plugins"
-dofile(vim.g.base46_cache .. "defaults")
+vim.schedule(function ()
+  require('base46').load_all_highlights()
+end)

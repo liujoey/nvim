@@ -10,6 +10,7 @@ M.ui = {
   theme_toggle = { "penumbra_light", "penumbra_dark" },
   transparency = false,
   lsp_semantic_tokens = false, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
+  extended_integrations = { "dap" },
 
   -- cmp themeing
   cmp = {
