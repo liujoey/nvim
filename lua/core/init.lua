@@ -70,7 +70,6 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
 
-
 -- dont list quickfix buffers
 autocmd("FileType", {
   group = augroup("no_qf_buff_in_list"),

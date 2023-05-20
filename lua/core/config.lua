@@ -28,7 +28,7 @@ M.ui = {
     theme = "default", -- default/vscode/vscode_colored/minimal
     -- default/round/block/arrow separators work only for default statusline theme
     -- round and block will work for minimal theme only
-    separator_style = "arrow",
+    separator_style = "default",
     overriden_modules = nil,
   },
 
@@ -58,8 +58,8 @@ M.ui = {
 
     buttons = {
       { "  Find File", "Spc f f", "Telescope find_files" },
-      { "  Recent Files", "Spc f o", "Telescope oldfiles" },
-      { "  Find Word", "Spc f w", "Telescope live_grep" },
+      { "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
+      { "󰈭  Find Word", "Spc f w", "Telescope live_grep" },
       { "  Bookmarks", "Spc b m", "Telescope marks" },
       { "  Themes", "Spc t h", "Telescope themes" },
       { "  Mappings", "Spc c h", "NvCheatsheet" },
@@ -77,6 +77,7 @@ M.ui = {
   },
 }
 
+M.plugins = {}
 M.lazy_nvim = require "plugins.configs.lazy_nvim" -- config for lazy.nvim startup options
 M.mappings = require "core.mappings"
 
