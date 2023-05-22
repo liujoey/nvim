@@ -142,6 +142,6 @@ return {
   -- better quick fix
   {
     "kevinhwang91/nvim-bqf",
-    lazy = false,
+    ft = "qf",
   },
 }

@@ -21,6 +21,12 @@ return {
     init = function()
       require("core.utils").load_mappings "telescope"
     end,
+    dependencies = {
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+      },
+    },
 
     opts = function()
       return require "plugins.configs.telescope"
@@ -30,6 +36,7 @@ return {
       dofile(vim.g.base46_cache .. "telescope")
       local telescope = require "telescope"
       telescope.setup(opts)
+      telescope.load_extension('fzf')
 
       -- load extensions
       for _, ext in ipairs(opts.extensions_list) do
