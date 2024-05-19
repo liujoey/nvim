@@ -14,7 +14,8 @@ return {
   { import = "astrocommunity.git.blame-nvim" },
 
   -- UI
-  { import = "astrocommunity.debugging/nvim-bqf" },
+  { import = "astrocommunity.debugging.nvim-bqf" },
+  { import = "astrocommunity.scrolling.neoscroll-nvim" },
 
   -- motion
   { import = "astrocommunity.motion.before-nvim" },
@@ -27,5 +28,4 @@ return {
   -- programming language
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.java" },
-  -- import/override with your plugins folder
 }
