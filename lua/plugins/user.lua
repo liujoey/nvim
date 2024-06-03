@@ -54,4 +54,27 @@ return {
     "tpope/vim-repeat",
     event = "InsertEnter",
   },
+  {
+    "mfussenegger/nvim-jdtls",
+    opts = function(_, opts)
+      local utils = require "astrocore"
+      return utils.extend_tbl({
+        settings = {
+          java = {
+            completion = {
+              importOrder = {
+                "#",
+                "java",
+                "javax",
+                "oracle.kv",
+                "oracle.nosql",
+                "com",
+                "org",
+              },
+            },
+          },
+        },
+      }, opts)
+    end,
+  },
 }
