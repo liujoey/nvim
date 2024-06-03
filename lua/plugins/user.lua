@@ -47,6 +47,16 @@ return {
     },
   },
   {
+    "kevinhwang91/nvim-ufo",
+    opts = {
+      preview = {
+        win_config = {
+          winblend = 0
+        }
+      }
+    }
+  },
+  {
     "tpope/vim-rsi",
     event = "InsertEnter",
   },
