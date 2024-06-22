@@ -22,39 +22,8 @@ return {
   },
 
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    opts = {
-      transparent_background = true,
-    },
-  },
-  {
-    "rcarriga/nvim-notify",
-    opts = {
-      background_colour = "#000000",
-    },
-  },
-  {
     "max397574/better-escape.nvim",
     opts = { mapping = { ",h" } },
-  },
-  {
-    "kevinhwang91/nvim-bqf",
-    opts = {
-      preview = {
-        winblend = 0,
-      },
-    },
-  },
-  {
-    "kevinhwang91/nvim-ufo",
-    opts = {
-      preview = {
-        win_config = {
-          winblend = 0
-        }
-      }
-    }
   },
   {
     "tpope/vim-rsi",
@@ -116,6 +85,7 @@ return {
                 callback = function ()
                   vim.opt_local.conceallevel = 2
                   vim.opt_local.concealcursor = "nv"
+                  vim.opt_local.wrap = true
                 end,
               },
             },

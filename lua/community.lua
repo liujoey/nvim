@@ -20,6 +20,8 @@ return {
   -- UI
   { import = "astrocommunity.debugging.nvim-bqf" },
   { import = "astrocommunity.scrolling.neoscroll-nvim" },
+  { import = "astrocommunity.utility.noice-nvim" },
+  { import = "astrocommunity.recipes.telescope-nvchad-theme" },
 
   -- motion
   { import = "astrocommunity.motion.before-nvim" },
