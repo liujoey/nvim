@@ -8,6 +8,10 @@ return {
   -- colorscheme
   { import = "astrocommunity.colorscheme.catppuccin" },
 
+  -- lsp
+  { import = "astrocommunity.lsp.lspsaga-nvim" },
+  { import = "astrocommunity.lsp.lsp-signature-nvim" },
+
   -- git
   { import = "astrocommunity.git.neogit" },
   { import = "astrocommunity.git.diffview-nvim" },
@@ -24,8 +28,12 @@ return {
   { import = "astrocommunity.motion.mini-surround" },
   { import = "astrocommunity.motion.nvim-spider" },
   { import = "astrocommunity.motion.vim-matchup" },
+  { import = "astrocommunity.motion.harpoon" },
 
   -- programming language
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.java" },
+
+  -- note taking
+  { import = "astrocommunity.note-taking.neorg" },
 }

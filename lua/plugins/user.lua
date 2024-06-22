@@ -66,6 +66,21 @@ return {
   },
   {
     "mfussenegger/nvim-jdtls",
+    dependencies = {
+      {
+        "AstroNvim/astrolsp",
+        opts = {
+          mappings = {
+            n = {
+              ["<leader>lo"] = {
+                function() require'jdtls'.organize_imports() end,
+                desc = "Organize Imports"
+              },
+            },
+          },
+        },
+      },
+    },
     opts = function(_, opts)
       local utils = require "astrocore"
       return utils.extend_tbl({
@@ -86,5 +101,38 @@ return {
         },
       }, opts)
     end,
+  },
+  {
+    "nvim-neorg/neorg",
+    dependencies = {
+      {
+        "AstroNvim/astrocore",
+        opts = {
+          autocmds = {
+            norg_conceals = {
+              {
+                event = "FileType",
+                pattern = "norg",
+                callback = function ()
+                  vim.opt_local.conceallevel = 2
+                  vim.opt_local.concealcursor = "nv"
+                end,
+              },
+            },
+          },
+        },
+      },
+    },
+    lazy = false,
+    opts = {
+      load = {
+        ["core.concealer"] = {
+          config = {
+            icon_preset = "diamond",
+          },
+        },
+      },
+    },
+    -- config = true,
   },
 }
