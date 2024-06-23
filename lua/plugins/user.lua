@@ -86,6 +86,7 @@ return {
                   vim.opt_local.conceallevel = 2
                   vim.opt_local.concealcursor = "nv"
                   vim.opt_local.wrap = true
+                  vim.opt_local.spell = true
                 end,
               },
             },
@@ -104,5 +105,20 @@ return {
       },
     },
     -- config = true,
+  },
+  {
+    "abecodes/tabout.nvim",
+    dependencies = {
+      {
+        "AstroNvim/astrocore",
+        opts = {
+          mappings = {
+            i = {
+              ["<C-l>"] = { "<Plug>(TaboutMulti)", desc = "TaboutMulti" },
+            }
+          },
+        },
+      },
+    },
   },
 }
