@@ -31,7 +31,7 @@ return {
         signcolumn = "yes", -- sets vim.opt.signcolumn to auto
         wrap = false, -- sets vim.opt.wrap
         scrolloff = 7,
-        cursorline = false,
+        -- cursorline = false,
       },
     },
     -- Mappings can be configured through AstroCore as well.

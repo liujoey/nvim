@@ -18,8 +18,11 @@ return {
       },
     },
     opts = function(_, opts)
+      local root_markers = { ".git", "mvnw", "gradlew", "build.gradle" }
+      local root_dir = require("jdtls.setup").find_root(root_markers)
       local utils = require "astrocore"
-      return utils.extend_tbl({
+      return utils.extend_tbl(opts, {
+        root_dir = root_dir,
         settings = {
           java = {
             completion = {
@@ -35,7 +38,7 @@ return {
             },
           },
         },
-      }, opts)
+      })
     end,
   },
 }

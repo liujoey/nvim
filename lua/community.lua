@@ -7,6 +7,7 @@ return {
   "AstroNvim/astrocommunity",
   -- colorscheme
   { import = "astrocommunity.colorscheme.catppuccin" },
+  { import = "astrocommunity.colorscheme.nightfox-nvim" },
 
   -- lsp
   { import = "astrocommunity.lsp.lspsaga-nvim" },
@@ -18,10 +19,8 @@ return {
   { import = "astrocommunity.git.blame-nvim" },
 
   -- UI
-  { import = "astrocommunity.debugging.nvim-bqf" },
-  { import = "astrocommunity.scrolling.neoscroll-nvim" },
+  { import = "astrocommunity.quickfix.nvim-bqf" },
   { import = "astrocommunity.utility.noice-nvim" },
-  { import = "astrocommunity.recipes.telescope-nvchad-theme" },
 
   -- motion
   { import = "astrocommunity.motion.before-nvim" },
@@ -39,4 +38,7 @@ return {
 
   -- note taking
   { import = "astrocommunity.note-taking.neorg" },
+
+  -- terminal
+  { import = "astrocommunity.terminal-integration.flatten-nvim" },
 }
