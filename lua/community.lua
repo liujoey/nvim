@@ -6,12 +6,10 @@
 return {
   "AstroNvim/astrocommunity",
   -- colorscheme
-  { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.colorscheme.nightfox-nvim" },
 
   -- lsp
   { import = "astrocommunity.lsp.lspsaga-nvim" },
-  { import = "astrocommunity.lsp.lsp-signature-nvim" },
 
   -- git
   { import = "astrocommunity.git.neogit" },
@@ -34,7 +32,6 @@ return {
 
   -- programming language
   { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.pack.java" },
 
   -- note taking
   { import = "astrocommunity.note-taking.neorg" },
