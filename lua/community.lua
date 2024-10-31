@@ -6,7 +6,7 @@
 return {
   "AstroNvim/astrocommunity",
   -- colorscheme
-  { import = "astrocommunity.colorscheme.nightfox-nvim" },
+  { import = "astrocommunity.colorscheme.rose-pine" },
 
   -- git
   { import = "astrocommunity.git.diffview-nvim" },
