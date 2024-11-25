@@ -26,7 +26,7 @@ return {
     options = {
       opt = { -- vim.opt.<key>
         signcolumn = "yes", -- sets vim.opt.signcolumn to auto
-        relativenumber = true, -- sets vim.opt.relativenumber
+        relativenumber = false, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number
         spell = false, -- sets vim.opt.spell
         wrap = false, -- sets vim.opt.wrap
