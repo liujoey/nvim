@@ -9,28 +9,6 @@ return {
     end,
   },
   {
-    "williamboman/mason-lspconfig.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "jdtls" })
-    end,
-  },
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "javadbg", "javatest" })
-    end,
-  },
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.ensure_installed =
-        require("astrocore").list_insert_unique(opts.ensure_installed, { "jdtls", "java-debug-adapter", "java-test" })
-    end,
-  },
-  {
     "nvimdev/lspsaga.nvim",
     event = "LspAttach",
     cmd = "Lspsaga",
@@ -52,9 +30,11 @@ return {
 
           -- call hierarchy
           maps.n["<Leader>lc"] =
-          { "<Cmd>Lspsaga incoming_calls<CR>", desc = "Incoming calls", cond = "callHierarchy/incomingCalls" }
+          { function() vim.lsp.buf.incoming_calls() end, desc = "Incoming calls (Quickfix)", cond = "callHierarchy/incomingCalls" }
           maps.n["<Leader>lC"] =
-          { "<Cmd>Lspsaga outgoing_calls<CR>", desc = "Outgoing calls", cond = "callHierarchy/outgoingCalls" }
+          { "<Cmd>Lspsaga incoming_calls<CR>", desc = "Incoming calls (Lspsaga)", cond = "callHierarchy/incomingCalls" }
+          maps.n["<Leader>lO"] =
+          { "<Cmd>Lspsaga outgoing_calls<CR>", desc = "Outgoing calls (Lspsaga)", cond = "callHierarchy/outgoingCalls" }
 
           -- code action
           maps.n["<Leader>la"] =
@@ -66,6 +46,10 @@ return {
           maps.n["<Leader>lp"] =
           { "<Cmd>Lspsaga peek_definition<CR>", desc = "Peek definition", cond = "textDocument/definition" }
 
+          -- -- outline
+          -- maps.n["<Leader>lS"] =
+          -- { "<Cmd>Lspsaga outline<CR>", desc = "Symbols outline", cond = "textDocument/documentSymbol" }
+          --
           -- references
           maps.n["<Leader>lR"] = {
             "<Cmd>Lspsaga finder<CR>",
@@ -112,137 +96,34 @@ return {
     end,
   },
   {
-    "mfussenegger/nvim-jdtls",
-    ft = { "java" },
-    dependencies = {
-      "williamboman/mason-lspconfig.nvim",
+    "nvim-java/nvim-java",
+    lazy = true,
+    opts = {
+      root_markers = {
+        'mvnw',
+        'gradlew',
+        '.git',
+      },
+      spring_boot_tools = {
+        enable = false,
+      },
+    },
+    specs = {
+      { "mfussenegger/nvim-jdtls", optional = true, enabled = false },
       {
         "AstroNvim/astrolsp",
         optional = true,
         ---@type AstroLSPOpts
         opts = {
-          ---@diagnostic disable: missing-fields
-          handlers = { jdtls = false },
-          features = { signature_help = true },
-          mappings = {
-            n = {
-              ["<leader>lo"] = {
-                function() require'jdtls'.organize_imports() end,
-                desc = "Organize Imports"
-              },
-            },
+          servers = { "jdtls" },
+          handlers = {
+            jdtls = function(server, opts)
+              require("lazy").load { plugins = { "nvim-java" } }
+              require("lspconfig")[server].setup(opts)
+            end,
           },
         },
       },
     },
-    opts = function(_, opts)
-      local utils = require "astrocore"
-      -- use this function notation to build some variables
-      local root_markers = { ".git", "mvnw", "gradlew", "build.gradle" }
-      local root_dir = require("jdtls.setup").find_root(root_markers)
-      -- calculate workspace dir
-      local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-      local workspace_dir = vim.fn.stdpath "data" .. "/site/java/workspace-root/" .. project_name
-      vim.fn.mkdir(workspace_dir, "p")
-
-      -- validate operating system
-      if not (vim.fn.has "mac" == 1 or vim.fn.has "unix" == 1 or vim.fn.has "win32" == 1) then
-        utils.notify("jdtls: Could not detect valid OS", vim.log.levels.ERROR)
-      end
-
-      return utils.extend_tbl({
-        cmd = {
-          "java",
-          "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-          "-Dosgi.bundles.defaultStartLevel=4",
-          "-Declipse.product=org.eclipse.jdt.ls.core.product",
-          "-Dlog.protocol=true",
-          "-Dlog.level=ALL",
-          -- "-javaagent:" .. vim.fn.expand "$MASON/share/jdtls/lombok.jar",
-          "-Xms512m",
-          "--add-modules=ALL-SYSTEM",
-          "--add-opens",
-          "java.base/java.util=ALL-UNNAMED",
-          "--add-opens",
-          "java.base/java.lang=ALL-UNNAMED",
-          "-jar",
-          vim.fn.expand "$MASON/share/jdtls/plugins/org.eclipse.equinox.launcher.jar",
-          "-configuration",
-          vim.fn.expand "$MASON/share/jdtls/config",
-          "-data",
-          workspace_dir,
-        },
-        root_dir = root_dir,
-        settings = {
-          java = {
-            eclipse = { downloadSources = true },
-            configuration = { updateBuildConfiguration = "interactive" },
-            maven = { downloadSources = true },
-            implementationsCodeLens = { enabled = false },
-            referencesCodeLens = { enabled = false },
-            -- inlayHints = { parameterNames = { enabled = "all" } },
-            signatureHelp = { enabled = true },
-            completion = {
-              importOrder = {
-                "#",
-                "java",
-                "javax",
-                "oracle.kv",
-                "oracle.nosql",
-                "com",
-                "org",
-              },
-              favoriteStaticMembers = {
-                "org.hamcrest.MatcherAssert.assertThat",
-                "org.hamcrest.Matchers.*",
-                "org.hamcrest.CoreMatchers.*",
-                "org.junit.jupiter.api.Assertions.*",
-                "java.util.Objects.requireNonNull",
-                "java.util.Objects.requireNonNullElse",
-                "org.mockito.Mockito.*",
-              },
-            },
-            sources = {
-              organizeImports = {
-                starThreshold = 9999,
-                staticStarThreshold = 9999,
-              },
-            },
-          },
-        },
-        init_options = {
-          bundles = {
-            vim.fn.expand "$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar",
-            -- unpack remaining bundles
-            (table.unpack or unpack)(vim.split(vim.fn.glob "$MASON/share/java-test/*.jar", "\n", {})),
-          },
-        },
-        handlers = {
-          ["$/progress"] = function() end, -- disable progress updates.
-        },
-        filetypes = { "java" },
-        on_attach = function(...)
-          require("jdtls").setup_dap { hotcodereplace = "auto" }
-          local astrolsp_avail, astrolsp = pcall(require, "astrolsp")
-          if astrolsp_avail then astrolsp.on_attach(...) end
-        end,
-      }, opts)
-    end,
-    config = function(_, opts)
-      -- setup autocmd on filetype detect java
-      vim.api.nvim_create_autocmd("Filetype", {
-        pattern = "java", -- autocmd to start jdtls
-        callback = function()
-          if opts.root_dir and opts.root_dir ~= "" then
-            require("jdtls").start_or_attach(opts)
-          else
-            require("astrocore").notify("jdtls: root_dir not found. Please specify a root marker", vim.log.levels.ERROR)
-          end
-        end,
-      })
-      -- create autocmd to load main class configs on LspAttach.
-      -- This ensures that the LSP is fully attached.
-      -- See https://github.com/mfussenegger/nvim-jdtls#nvim-dap-configuration
-    end,
-  },
+  }
 }

@@ -10,5 +10,6 @@ return {
   opts = {
     -- change colorscheme
     colorscheme = "rose-pine-dawn",
+    -- colorscheme = "dawnfox",
   },
 }
